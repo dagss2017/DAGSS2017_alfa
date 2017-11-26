@@ -17,27 +17,27 @@
             <ui:define name="menu">
                 <ui:include src="/plantillas/menuComun.xhtml"/>
             </ui:define>
-boot
+
             <ui:define name="contenido">
                 <h:form id="searchForm">
-                    <b:column offset="3" span="6">
+                    <b:column offset="2" span="8">
                         <b:panel title="Buscar recetas" look="primary" collapsible="false">
                             <b:inputText id="nts" label="Nº Tarjeta Sanitaria:" value="#{atencionPacienteControlador.nts}" />
-                            <b:commandButton value="Buscar" action="#{atencionPacienteControlador.doBuscarRecetasEnVigor()}" span="2"/>
+                            <b:commandButton id="searchButton" value="Buscar" action="#{atencionPacienteControlador.doBuscarRecetasEnVigor()}" span="2"/>
                         </b:panel>
                     </b:column> 
                     
-                    <b:column offset="3" span="6"> 
+                    <b:column offset="2" span="8"> 
                         <h2>#{atencionPacienteControlador.nombre_paciente}</h2>
                      </b:column> 
 
-                    <b:column offset="3" span="6">                        
-                        <b:dataTable value="#{atencionPacienteControlador.recetas}"                                    
+                    <b:column offset="2" span="8">                        
+                        <b:dataTable id="lista_recetas" value="#{atencionPacienteControlador.recetas}"                                    
                              var="receta">
                             
                             <h:column>
-                                <f:facet name="header"><h:outputLabel value="Nombre medicamento"/></f:facet>
-                                <h:outputText value="#{receta.prescripcion.medicamento.nombre}" />                              
+                                <f:facet name="header"><h:outputLabel value="Medicamento"/></f:facet>
+                                <h:outputText  value="#{receta.prescripcion.medicamento.nombre}" />                              
                             </h:column>
                             
                             <h:column>
@@ -47,19 +47,31 @@ boot
                             
                             <h:column>
                                 <f:facet name="header"><h:outputLabel value="Inicio Validez"/></f:facet>
-                                <h:outputText value="#{receta.inicioValidez}" >
+                                <h:outputText id="inicio_validez" value="#{receta.inicioValidez}" >
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                             </h:column>
                             
                             <h:column>
                                 <f:facet name="header"><h:outputLabel value="Fin Validez"/></f:facet>
-                                <h:outputText value="#{receta.finValidez}" >
+                                <h:outputText id="fin_validez" value="#{receta.finValidez}" >
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                             </h:column>
                             
+                            <h:column>
+                                <f:facet name="header"><h:outputLabel value="Estado"/></f:facet>
+                                <h:outputText value="#{receta.estadoReceta}" />
+                            </h:column>
+                            
+                            <h:column class="text-center">
+                                <f:facet name="header"><h:outputLabel value="Servir"/></f:facet>
+                                <h:commandLink id="servir-icon" action="#{atencionPacienteControlador}">
+           
+                                </h:commandLink>
+                            </h:column>
                         </b:dataTable>
+                        
                     </b:column>
                 </h:form> 
             </ui:define>

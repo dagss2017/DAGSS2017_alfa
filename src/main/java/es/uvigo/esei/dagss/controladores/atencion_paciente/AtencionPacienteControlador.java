@@ -59,8 +59,10 @@ public class AtencionPacienteControlador implements Serializable {
     
     public String doBuscarRecetasEnVigor(){
         recetas = recetaDAO.buscarRecetasNts(nts);
+        if(!recetas.isEmpty()){
         nombre_paciente = recetas.get(0).getPrescripcion().getPaciente().getNombre()   
                    + " " + recetas.get(0).getPrescripcion().getPaciente().getApellidos();
+        }
         
         return "index";
     }
