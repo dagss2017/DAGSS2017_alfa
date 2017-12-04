@@ -17,8 +17,14 @@ $( document ).ready(function() {
             }else{
                 $("[id='searchForm:lista_recetas:"+i+":servir-button']").attr("class","btn disabled");
             }
-        }     
+        }   
+        
+    //VISTA MÉDICO
+    var $hoy = new Date();
+    $("[id='fecha_citas_hoy']").html("Agenda para el: "+ $hoy.getDate() + "/" +$hoy.getMonth() + "/" +$hoy.getFullYear() );
+     
    });
+   
 
 function formatearFecha(fecha){
     var res = fecha.split("/");

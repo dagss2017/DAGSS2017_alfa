@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <body>
 
@@ -19,6 +20,43 @@
             </ui:define>
 
             <ui:define name="contenido">
+                <h:form>
+                    <h:commandButton id="render_citas" actionListener="#{atencionPacienteControlador.doBuscarCitasHoy(medicoControlador.medicoActual)}" style="display: none" />
+                </h:form>
+                
+                <b:column offset="2" span="8"> 
+                    <h2 id="fecha_citas_hoy"> </h2>
+                </b:column>
+                
+                <b:column offset="2" span="8">                        
+                    <b:dataTable id="lista_citas" value="#{atencionPacienteControlador.citas}"                                    
+                         var="citas">
+                        
+                        <h:column>
+                         <f:facet name="header"><h:outputLabel value="Hora"/></f:facet>
+                            <h:outputText value="#{citas.hora}" >
+                                <f:convertDateTime timeZone="CET" pattern="HH:mm"/>
+                            </h:outputText>                            
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header"><h:outputLabel value="Paciente"/></f:facet>
+                            <h:outputText value="#{citas.paciente.nombre} #{citas.paciente.apellidos}" /> 
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header"><h:outputLabel value="Estado"/></f:facet>
+                            <h:outputText  value="#{citas.estado}" />                              
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header"><h:outputLabel value=""/></f:facet>
+                            <h:outputText value="" /> 
+                        </h:column>
+
+                    </b:dataTable>
+
+                </b:column>
             </ui:define>
         </ui:composition>
 
