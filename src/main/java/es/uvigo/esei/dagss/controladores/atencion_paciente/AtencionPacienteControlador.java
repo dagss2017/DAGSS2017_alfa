@@ -7,6 +7,7 @@ package es.uvigo.esei.dagss.controladores.atencion_paciente;
 
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
+import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
 import es.uvigo.esei.dagss.dominio.entidades.Receta;
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +20,7 @@ import javax.inject.Named;
  *
  * @author José Angel
  */
-@Named()
+@Named
 @SessionScoped
 public class AtencionPacienteControlador implements Serializable {
     
@@ -67,5 +68,10 @@ public class AtencionPacienteControlador implements Serializable {
         return "index";
     }
     
- 
+    public String doServirRecetaPaciente(Receta receta, Farmacia farmaciaDispensadora){
+        recetaDAO.servirRecetas(receta,farmaciaDispensadora);
+        recetas = recetaDAO.buscarRecetasNts(getNts());
+        return "index";
+    }
+    
 }

@@ -1,14 +1,21 @@
-$( document ).ready(function() {    
+$( document ).ready(function() {  
+    //VISTA FARMACIA
+        //Obtener número de tablas
         var $rows = ($("[id='searchForm:lista_recetas'] tbody tr")).length;
+        //Limpiar nombre de paciente
+        if($rows===0){
+            $("#nombre-paciente").empty();
+        }
         var $hoy = new Date().getTime();
         for (var i = 0, max = $rows; i < max; i++) {
+            var $estadoReceta = $("[id='searchForm:lista_recetas:"+i+":estadoReceta']").text();
             var $inicio = formatearFecha($("[id='searchForm:lista_recetas:"+i+":inicio_validez']").text());
             var $fin = formatearFecha($("[id='searchForm:lista_recetas:"+i+":fin_validez']").text());
 
-            if($hoy >= $inicio && $hoy<$fin){
-                $("[id='searchForm:lista_recetas:"+i+":servir-icon']").html('<span><i id="searchForm:lista_recetas:0:j_idt41" class="fa fa-check"></i></span>');  
+            if ($hoy >= $inicio && $hoy<$fin && $estadoReceta!=="SERVIDA"){
+                $("[id='searchForm:lista_recetas:"+i+":servir-button']").attr("class","btn btn-primary");  
             }else{
-                $("[id='searchForm:lista_recetas:"+i+":servir-icon']").html('<span><i id="searchForm:lista_recetas:0:j_idt41" class="disabled fa fa-close"></i></span>');  
+                $("[id='searchForm:lista_recetas:"+i+":servir-button']").attr("class","btn disabled");
             }
         }     
    });
