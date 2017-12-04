@@ -17,8 +17,33 @@ $( document ).ready(function() {
             }else{
                 $("[id='searchForm:lista_recetas:"+i+":servir-button']").attr("class","btn disabled");
             }
-        }     
+        }   
+        
+    //VISTA MÉDICO
+    var $hoy = new Date();
+    $("[id='fecha_citas_hoy']").html("Agenda para el: "+ $hoy.getDate() + "/" +$hoy.getMonth() + "/" +$hoy.getFullYear() );
+    var $rows = ($("[id='searchForm:lista_citas'] tbody tr")).length;
+    for (var i = 0, max = $rows; i < max; i++) {
+        var $estadoCita = $("[id='searchForm:lista_citas:"+i+":estadoCita']").text();       
+        if ($estadoCita==="PLANIFICADA"){
+            $("[id='searchForm:lista_citas:"+i+":atender-button']").attr("class","btn btn-primary");  
+        }else{           
+            $("[id='searchForm:lista_citas:"+i+":atender-button']").attr("class","btn disabled");
+        }
+   
+        $("[id='searchForm:lista_citas:"+i+":atender-button']").click(function() {
+            $('.modalPseudoClass2').modal({
+                backdrop: true,
+                show:true
+            });
+        });
+        
+    }
+    
+
+
    });
+   
 
 function formatearFecha(fecha){
     var res = fecha.split("/");

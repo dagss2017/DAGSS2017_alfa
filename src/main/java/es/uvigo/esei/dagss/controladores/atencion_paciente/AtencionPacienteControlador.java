@@ -6,8 +6,11 @@
 package es.uvigo.esei.dagss.controladores.atencion_paciente;
 
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
+import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
+import es.uvigo.esei.dagss.dominio.entidades.Cita;
 import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
+import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Receta;
 import java.io.Serializable;
 import java.util.List;
@@ -26,6 +29,8 @@ public class AtencionPacienteControlador implements Serializable {
     
     private String nts;
     private List<Receta> recetas;
+    private List<Cita> citas;
+    
     private String nombre_paciente;
     
     @Inject
@@ -33,6 +38,9 @@ public class AtencionPacienteControlador implements Serializable {
     
     @EJB
     private RecetaDAO recetaDAO;
+    
+    @EJB
+    private CitaDAO citaDAO;
 
     public String getNombre_paciente() {
         return nombre_paciente;
@@ -58,6 +66,16 @@ public class AtencionPacienteControlador implements Serializable {
         this.nts = nts;
     }
     
+    public List<Cita> getCitas() {
+        return citas;
+    }
+
+    public void setCitas(List<Cita> citas) {
+        this.citas = citas;
+    }
+    
+    
+    //Gestión Recetas
     public String doBuscarRecetasEnVigor(){
         recetas = recetaDAO.buscarRecetasNts(nts);
         if(!recetas.isEmpty()){
@@ -73,5 +91,13 @@ public class AtencionPacienteControlador implements Serializable {
         recetas = recetaDAO.buscarRecetasNts(getNts());
         return "index";
     }
+    
+    //Gestión Citas
+    public String doBuscarCitasHoy(Medico m){
+        citas = citaDAO.buscarCitas(m);
+        //System.out.println(citas.get(0).getFecha());
+        return "index";
+    }
+    
     
 }
