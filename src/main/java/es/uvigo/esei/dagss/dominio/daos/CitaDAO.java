@@ -20,7 +20,6 @@ public class CitaDAO extends GenericoDAO<Cita>{
 
     public List<Cita> buscarCitas(Medico m){
         Date fecha_actual = Calendar.getInstance().getTime();
-        System.out.println(m.getApellidos()+"asdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         TypedQuery<Cita> q = em.createQuery("SELECT c FROM Cita AS c "
                 + " WHERE c.medico = :m", Cita.class);
         
