@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
 @LocalBean
 public class CitaDAO extends GenericoDAO<Cita>{    
 
-    public List<Cita> buscarCitas(Medico m){
+    public List<Cita> buscarCitasPorMedico(Medico m){
         Date fecha_actual = Calendar.getInstance().getTime();
         TypedQuery<Cita> q = em.createQuery("SELECT c FROM Cita AS c "
                 + " WHERE c.medico = :m", Cita.class);

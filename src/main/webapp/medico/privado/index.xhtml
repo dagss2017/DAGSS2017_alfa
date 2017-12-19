@@ -20,55 +20,47 @@
             </ui:define>
 
             <ui:define name="contenido">
-                <h:form>
-                    <h:commandButton id="render_citas" actionListener="#{atencionPacienteControlador.doBuscarCitasHoy(medicoControlador.medicoActual)}" />
-                </h:form>
-                
                 <b:column offset="2" span="8"> 
                     <h2 id="fecha_citas_hoy"> </h2>
                 </b:column>
                 <h:form id="searchForm">
                     <b:column offset="2" span="8">                        
-                        <b:dataTable id="lista_citas" value="#{atencionPacienteControlador.citas}"                                    
-                             var="citas">
+                        <b:dataTable id="lista_citas" value="#{atencionPacienteControlador.buscarCitasHoy(medicoControlador.medicoActual)}"                                    
+                             var="cita">
+                            
+                            <h:column>
+                                <f:facet name="header"><h:outputLabel value="Id"/></f:facet>
+                                <h:outputText id="id-cita" value="#{cita.id}" />                          
+                            </h:column>
 
                             <h:column>
-                             <f:facet name="header"><h:outputLabel value="Hora"/></f:facet>
-                                <h:outputText value="#{citas.hora}" >
+                                <f:facet name="header"><h:outputLabel value="Hora"/></f:facet>
+                                <h:outputText id="hora-cita" value="#{cita.hora}" >
                                     <f:convertDateTime timeZone="CET" pattern="HH:mm"/>
                                 </h:outputText>                            
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header"><h:outputLabel value="Paciente"/></f:facet>
-                                <h:outputText value="#{citas.paciente.nombre} #{citas.paciente.apellidos}" /> 
+                                <h:outputText id="nombre-paciente" value="#{cita.paciente.nombre} #{cita.paciente.apellidos}" /> 
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header"><h:outputLabel value="Estado"/></f:facet>
-                                <h:outputText id="estadoCita"  value="#{citas.estado}" />                              
+                                <h:outputText id="estadoCita"  value="#{cita.estado}" />                              
                             </h:column>
 
                             <h:column class="text-center">
                                 <f:facet name="header"><h:outputLabel value="Atender"/></f:facet>
-                                    <h:commandButton type="button" id="atender-button" value="Atender"  />
+                                <h:commandButton id="atender-button" value="Atender" 
+                                                 action="#{atencionPacienteControlador.doAtenderCita(cita)}" />
+                                                             
                             </h:column>
 
                         </b:dataTable>
                 
                     </b:column>
-                </h:form>
-                           
-                <h:form id="myFormID">
-                    <b:modal id="amodal2" title="Modal Example" styleClass="modalPseudoClass2"
-                             closable="true"  close-on-escape="false" backdrop="false">
-                        
-                        <f:facet name="footer">
-                            <b:button value="Close" dismiss="modal" />
-                            <b:button value="Ok" look="primary" dismiss="modal" />
-                        </f:facet>
-                    </b:modal>
-                </h:form>
+                </h:form>                          
             </ui:define>
   
         </ui:composition>

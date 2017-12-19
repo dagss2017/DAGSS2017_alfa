@@ -6,6 +6,7 @@
 package es.uvigo.esei.dagss.controladores.atencion_paciente;
 
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
+import es.uvigo.esei.dagss.controladores.medico.MedicoControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
@@ -15,6 +16,7 @@ import es.uvigo.esei.dagss.dominio.entidades.Receta;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,6 +32,15 @@ public class AtencionPacienteControlador implements Serializable {
     private String nts;
     private List<Receta> recetas;
     private List<Cita> citas;
+
+    public Cita getCitaActual() {
+        return citaActual;
+    }
+
+    public void setCitaActual(Cita citaActual) {
+        this.citaActual = citaActual;
+    }
+    private Cita citaActual;
     
     private String nombre_paciente;
     
@@ -93,10 +104,13 @@ public class AtencionPacienteControlador implements Serializable {
     }
     
     //Gestión Citas
-    public String doBuscarCitasHoy(Medico m){
-        citas = citaDAO.buscarCitas(m);
-        //System.out.println(citas.get(0).getFecha());
-        return "index";
+    public List<Cita> buscarCitasHoy(Medico m){
+        return citaDAO.buscarCitasPorMedico(m);
+    }
+    
+    public String doAtenderCita(Cita cita){
+        this.citaActual = cita;
+        return "atencionPaciente";
     }
     
     

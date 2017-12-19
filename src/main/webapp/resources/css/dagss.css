@@ -104,3 +104,9 @@ a:link:hover, a:visited:hover  {
 	border-style: solid;
 	border-color: black;
 }
+
+.my-btn{
+    text-decoration: none !important;
+    color: white !important;
+    font-weight: normal !important;
+}
