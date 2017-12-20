@@ -5,6 +5,7 @@
 package es.uvigo.esei.dagss.dominio.daos;
 
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
+import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,4 +29,9 @@ public class CitaDAO extends GenericoDAO<Cita>{
         q.setParameter("fecha_actual", fecha_actual);
         return q.getResultList();
     }
+    
+    public void cambiarEstadoCita(Cita c,String estadoCita){
+        c.setEstado(EstadoCita.valueOf(estadoCita));      
+        actualizar(c);
+    };
 }

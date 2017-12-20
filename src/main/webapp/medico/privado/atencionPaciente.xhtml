@@ -25,7 +25,7 @@
             <ui:define name="contenido">
                 <b:jumbotron>
                     <h2>Paciente: #{atencionPacienteControlador.citaActual.paciente.nombre}</h2>
-                    <b:column id="menu-medico">
+                    <b:column class="menu-medico">
                         <h:form>
                             <h:commandButton class="btn btn-primary my-margin-button" value="Ver prescripciones" 
                                           action="#{atencionPacienteControlador.
@@ -33,6 +33,17 @@
                         </h:form>  
                         <h:link class="btn btn-primary my-margin-button my-btn" value="Confeccionar prescripción" outcome="formularioPrescripcion" />                    
                     </b:column>
+                     <b:column class="menu-medico">
+                        <h:form>
+                            <b:selectOneMenu value="#{atencionPacienteControlador.estadoCita}"  label="Cambiar estado cita:" >
+                                <f:selectItem itemLabel="Ausente" itemValue="AUSENTE" />
+                                <f:selectItem itemLabel="Completada" itemValue="COMPLETADA" />
+                            </b:selectOneMenu>  
+                            <h:commandButton class="btn btn-primary my-margin-button" value="Cambiar" 
+                                             action="#{atencionPacienteControlador.doCambiarEstadoCita()}" />
+                            
+                        </h:form> 
+                     </b:column>
                     <b:dataTable id="lista_prescripciones" value="#{atencionPacienteControlador.prescripciones}"                                    
                              var="prescripcion">                            
                             <h:column>

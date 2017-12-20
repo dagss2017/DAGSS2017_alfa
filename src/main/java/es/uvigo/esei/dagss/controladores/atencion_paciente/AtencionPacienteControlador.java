@@ -11,6 +11,7 @@ import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
+import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
 import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
@@ -33,17 +34,10 @@ import javax.inject.Named;
 public class AtencionPacienteControlador implements Serializable {
     
     private String nts;
+    private String estadoCita;
     private List<Receta> recetas;
     private List<Cita> citas;
     private List<Prescripcion> prescripciones;
-    
-    public Cita getCitaActual() {
-        return citaActual;
-    }
-
-    public void setCitaActual(Cita citaActual) {
-        this.citaActual = citaActual;
-    }
     private Cita citaActual;
     private String nombre_paciente;
     
@@ -70,6 +64,14 @@ public class AtencionPacienteControlador implements Serializable {
     public List<Receta> getRecetas() {
         return recetas;
     }
+    
+    public String getEstadoCita() {
+        return estadoCita;
+    }
+
+    public void setEstadoCita(String estadoCita) {
+        this.estadoCita = estadoCita;
+    }
 
     public void setRecetas(List<Receta> recetas) {
         this.recetas = recetas;
@@ -91,6 +93,14 @@ public class AtencionPacienteControlador implements Serializable {
         this.citas = citas;
     }
     
+    public Cita getCitaActual() {
+        return citaActual;
+    }
+
+    public void setCitaActual(Cita citaActual) {
+        this.citaActual = citaActual;
+    }
+       
     public List<Prescripcion> getPrescripciones() {
         return prescripciones;
     }
@@ -98,6 +108,7 @@ public class AtencionPacienteControlador implements Serializable {
     public void setPrescripciones(List<Prescripcion> prescripciones) {
         this.prescripciones = prescripciones;
     }
+    
     
     
     //Gestión Recetas
@@ -132,5 +143,9 @@ public class AtencionPacienteControlador implements Serializable {
         return "atencionPaciente";    
     }
    
+    public String doCambiarEstadoCita(){  
+        citaDAO.cambiarEstadoCita(citaActual, estadoCita);
+        return "index";
+    }
     
 }

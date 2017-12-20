@@ -115,8 +115,16 @@ a:link:hover, a:visited:hover  {
     margin: 0 15px 15px 0 !important;
 }
 
-#menu-medico{
-    padding-left: 0;
-    display: flex;
-    justify-content: flex-start;
+.menu-medico{
+    padding-left: 0 !important;
+    display: flex !important;
+}
+
+.formulario-estado{
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+.separate-items{
+    margin-right: 10px;
 }
