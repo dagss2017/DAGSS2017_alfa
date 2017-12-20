@@ -37,26 +37,9 @@ $( document ).ready(function() {
     
    });
    
+//   $table = $("[id='searchForm:lista_prescripciones']").Datatable();
+//   $table.destroy();  
    
-    //Desplegar modal
-//    $("[id='searchForm:lista_citas:0:atender-button']").click(function() { 
-//
-//            $('.modalPseudoClass2').modal({
-//                backdrop: true,
-//                show:true
-//            });
-//    });
-//    
-//    
-//function editar_modal(datos_paciente){
-//    var datos_paciente = datos_paciente;  
-//        $('.modalPseudoClass2').on('show.bs.modal', function() {
-//        $("[id='myFormID:datos-paciente']").html("<h4>"+datos_paciente["hora"]+" - "+datos_paciente["nombre"]+"</h4>");
-//        $("[id='myFormID:cambiar-estado']").html();
-//    });
-//}
-   
-
 function formatearFecha(fecha){
     var res = fecha.split("/");
     var dia = res[0]; 

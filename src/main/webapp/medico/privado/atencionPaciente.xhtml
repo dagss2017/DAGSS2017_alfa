@@ -25,6 +25,50 @@
             <ui:define name="contenido">
                 <b:jumbotron>
                     <h2>Paciente: #{atencionPacienteControlador.citaActual.paciente.nombre}</h2>
+                    <b:column class="menu-medico">
+                        <h:form>
+                            <h:commandButton class="btn btn-primary my-margin-button" value="Ver prescripciones" 
+                                          action="#{atencionPacienteControlador.
+                                                    doListarPrescripciones(atencionPacienteControlador.citaActual.paciente)}" />
+                        </h:form>  
+                        <h:link class="btn btn-primary my-margin-button my-btn" value="Confeccionar prescripción" outcome="formularioPrescripcion" />                    
+                    </b:column>
+                     <b:column class="menu-medico">
+                        <h:form>
+                            <b:selectOneMenu value="#{atencionPacienteControlador.estadoCita}"  label="Cambiar estado cita:" >
+                                <f:selectItem itemLabel="Ausente" itemValue="AUSENTE" />
+                                <f:selectItem itemLabel="Completada" itemValue="COMPLETADA" />
+                            </b:selectOneMenu>  
+                            <h:commandButton class="btn btn-primary my-margin-button" value="Cambiar" 
+                                             action="#{atencionPacienteControlador.doCambiarEstadoCita()}" />
+                            
+                        </h:form> 
+                     </b:column>
+                    <b:dataTable id="lista_prescripciones" value="#{atencionPacienteControlador.prescripciones}"                                    
+                             var="prescripcion">                            
+                            <h:column>
+                                <f:facet name="header"><h:outputLabel value="Medicamento"/></f:facet>
+                                <h:outputText  value="#{prescripcion.medicamento.nombre}" />                              
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header"><h:outputLabel value="Dosis"/></f:facet>
+                                <h:outputText value="#{prescripcion.medicamento.numeroDosis}" /> 
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header"><h:outputLabel value="Fecha Inicio"/></f:facet>
+                                <h:outputText value="#{prescripcion.fechaInicio}" >
+                                    <f:convertDateTime timeZone="CET" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputLabel value="Fecha Fin"/></f:facet>
+                                <h:outputText value="#{prescripcion.fechaFin}" >
+                                    <f:convertDateTime timeZone="CET" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </h:column> 
+                    </b:dataTable>
                 </b:jumbotron>
             </ui:define>
 
