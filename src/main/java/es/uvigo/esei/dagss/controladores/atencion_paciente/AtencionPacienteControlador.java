@@ -8,10 +8,13 @@ package es.uvigo.esei.dagss.controladores.atencion_paciente;
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
 import es.uvigo.esei.dagss.controladores.medico.MedicoControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
+import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
 import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
+import es.uvigo.esei.dagss.dominio.entidades.Paciente;
+import es.uvigo.esei.dagss.dominio.entidades.Prescripcion;
 import es.uvigo.esei.dagss.dominio.entidades.Receta;
 import java.io.Serializable;
 import java.util.List;
@@ -32,7 +35,8 @@ public class AtencionPacienteControlador implements Serializable {
     private String nts;
     private List<Receta> recetas;
     private List<Cita> citas;
-
+    private List<Prescripcion> prescripciones;
+    
     public Cita getCitaActual() {
         return citaActual;
     }
@@ -41,7 +45,6 @@ public class AtencionPacienteControlador implements Serializable {
         this.citaActual = citaActual;
     }
     private Cita citaActual;
-    
     private String nombre_paciente;
     
     @Inject
@@ -52,6 +55,9 @@ public class AtencionPacienteControlador implements Serializable {
     
     @EJB
     private CitaDAO citaDAO;
+    
+    @EJB
+    private PrescripcionDAO prescripcionDAO;
 
     public String getNombre_paciente() {
         return nombre_paciente;
@@ -85,6 +91,14 @@ public class AtencionPacienteControlador implements Serializable {
         this.citas = citas;
     }
     
+    public List<Prescripcion> getPrescripciones() {
+        return prescripciones;
+    }
+
+    public void setPrescripciones(List<Prescripcion> prescripciones) {
+        this.prescripciones = prescripciones;
+    }
+    
     
     //Gestión Recetas
     public String doBuscarRecetasEnVigor(){
@@ -113,5 +127,10 @@ public class AtencionPacienteControlador implements Serializable {
         return "atencionPaciente";
     }
     
+    public String doListarPrescripciones(Paciente paciente){
+        prescripciones = prescripcionDAO.buscarPrescipcionesPaciente(paciente);
+        return "atencionPaciente";    
+    }
+   
     
 }

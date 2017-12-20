@@ -21,10 +21,11 @@ public class CitaDAO extends GenericoDAO<Cita>{
     public List<Cita> buscarCitasPorMedico(Medico m){
         Date fecha_actual = Calendar.getInstance().getTime();
         TypedQuery<Cita> q = em.createQuery("SELECT c FROM Cita AS c "
-                + " WHERE c.medico = :m", Cita.class);
+                + " WHERE c.medico = :m"
+                + " AND c.fecha = :fecha_actual ", Cita.class);
         
         q.setParameter("m", m);
-        
+        q.setParameter("fecha_actual", fecha_actual);
         return q.getResultList();
     }
 }
