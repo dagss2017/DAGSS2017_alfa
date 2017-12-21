@@ -30,8 +30,10 @@
                             <h:commandButton class="btn btn-primary my-margin-button" value="Ver prescripciones" 
                                           action="#{atencionPacienteControlador.
                                                     doListarPrescripciones(atencionPacienteControlador.citaActual.paciente)}" />
+                        
+                            <h:commandButton class="btn btn-primary my-margin-button" value="Confeccionar prescripcion" 
+                                             action="#{prescripcionControlador.renderizarConfeccionarPrescripcion()}" />                    
                         </h:form>  
-                        <h:link class="btn btn-primary my-margin-button my-btn" value="Confeccionar prescripción" outcome="formularioPrescripcion" />                    
                     </b:column>
                      <b:column class="menu-medico">
                         <h:form>
@@ -53,7 +55,7 @@
                             
                             <h:column>
                                 <f:facet name="header"><h:outputLabel value="Dosis"/></f:facet>
-                                <h:outputText value="#{prescripcion.medicamento.numeroDosis}" /> 
+                                <h:outputText value="#{prescripcion.dosis}" /> 
                             </h:column>
                             
                             <h:column>

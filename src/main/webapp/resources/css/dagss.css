@@ -128,3 +128,12 @@ a:link:hover, a:visited:hover  {
 .separate-items{
     margin-right: 10px;
 }
+
+.custom-grid td{
+    padding-right: 10px !important;   
+    vertical-align: text-top;
+}
+
+.panel-body label{
+    padding-right: 10px !important;
+}
