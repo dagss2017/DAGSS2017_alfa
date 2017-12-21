@@ -6,6 +6,7 @@ package es.uvigo.esei.dagss.dominio.entidades;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Entity
+@DiscriminatorValue(value = "medicamento")
 public class Medicamento implements Serializable {
 
     @Id
@@ -39,7 +41,7 @@ public class Medicamento implements Serializable {
     @Min(1)
     Integer numeroDosis;
 
-
+   
     public Medicamento() {
     }
 
@@ -124,9 +126,7 @@ public class Medicamento implements Serializable {
 
     @Override
     public String toString() {
-        return "Medicamento{" + "id=" + id + ", nombre=" + nombre + '}';
+        return "Medicamento{" + "id=" + id + ", nombre=" + nombre + ", principioActivo=" + principioActivo + ", fabricante=" + fabricante + ", familia=" + familia + ", numeroDosis=" + numeroDosis + '}';
     }
-
-
     
 }

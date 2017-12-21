@@ -3,13 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="/plantillas/plantillaComun.xhtml">
-
+            
+            <ui:define name="tituloPagina">
+                <h2>  Formulario de prescripcion </h2>
+            </ui:define>
+            
             <ui:define name="menu">
                 <ui:include src="/plantillas/menuComun.xhtml"/>
             </ui:define>
@@ -17,10 +22,39 @@
             <ui:define name="contenido">
                 <h:form>
                     <b:column offset="2" span="8">
-                        <b:panel title="Confecconar prescripción" look="primary" collapsible="false" >
-
+                        <b:panel title="Confeccionar prescripción" look="primary" collapsible="false">  
+                            <h:panelGrid title="Confeccionar prescripción" rendered="#{prescripcionControlador.prescripcionActual != null}">
+                                
+                                    <p:outputLabel value="Medicamento" for="medicamento" />
+                                    <p:autoComplete id="medicamento" value="#{prescripcionControlador.prescripcionActual.medicamento}" completeMethod="#{prescripcionControlador.completeText}"
+                                        var="medicamento" itemLabel="#{medicamento.nombre}" itemValue="#{medicamento}" converter="omnifaces.SelectItemsConverter"  forceSelection="true">        
+                                        <p:column>
+                                            <h:outputText value="#{medicamento.nombre}" />
+                                        </p:column>
+                                        <f:facet name="itemtip">
+                                            <h:panelGrid columns="2" cellpadding="15" class="custom-grid" > 
+                                                <h:outputLabel value="Nombre: " />
+                                                <h:outputText value="#{medicamento.nombre}" />
+                                                <h:outputLabel value="Fabricante: " />
+                                                <h:outputText value="#{medicamento.fabricante}" />                                    
+                                                <h:outputLabel value="Familia: " />
+                                                <h:outputText value="#{medicamento.familia}" />
+                                            </h:panelGrid>
+                                        </f:facet>
+                                    </p:autoComplete>
+                                    <p:outputLabel value="Dosis"/>
+                                    <p:inputNumber value="#{prescripcionControlador.prescripcionActual.dosis}"/>
+                                    <p:outputLabel value="Fecha Inicio"/>
+                                    <p:calendar pages="3" value="#{prescripcionControlador.prescripcionActual.fechaInicio}" />
+                                    <p:outputLabel value="Fecha Fin"/>
+                                    <p:calendar pages="3" value="#{prescripcionControlador.prescripcionActual.fechaFin}" />
+                                    <p:outputLabel value="Indicaciones"/>
+                                    <p:inputTextarea cols="60" value="#{prescripcionControlador.prescripcionActual.indicaciones}"></p:inputTextarea>
+                                    <h:commandButton class="btn btn-primary my-margin-button" value="Confirmar" 
+                                                     action="#{prescripcionControlador.doConfeccionarPrescripcion(atencionPacienteControlador.citaActual)}" />
+                            </h:panelGrid>
                         </b:panel>
-                    </b:column> 
+                    </b:column>
                 </h:form>
             </ui:define>
 
