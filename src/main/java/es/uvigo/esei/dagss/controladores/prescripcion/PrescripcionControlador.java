@@ -5,6 +5,7 @@
  */
 package es.uvigo.esei.dagss.controladores.prescripcion;
 
+import es.uvigo.esei.dagss.controladores.atencion_paciente.AtencionPacienteControlador;
 import es.uvigo.esei.dagss.dominio.daos.MedicamentoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -25,7 +27,13 @@ import javax.inject.Named;
 public class PrescripcionControlador implements Serializable {
     
     private Prescripcion prescripcionActual;
-
+            
+    @EJB
+    private MedicamentoDAO medicamentoDAO;
+        
+    @EJB
+    private PrescripcionDAO prescripcionDAO;
+    
     public Prescripcion getPrescripcionActual() {
         return prescripcionActual;
     }
@@ -34,11 +42,6 @@ public class PrescripcionControlador implements Serializable {
         this.prescripcionActual = prescripcionActual;
     }
     
-    @EJB
-    private MedicamentoDAO medicamentoDAO;
-        
-    @EJB
-    private PrescripcionDAO prescripcionDAO;
     public List<Medicamento> completeText(String query) {       
         return medicamentoDAO.buscarPorCampos(query);
     }
@@ -52,6 +55,21 @@ public class PrescripcionControlador implements Serializable {
         prescripcionActual.setMedico(c.getMedico());
         prescripcionActual.setPaciente(c.getPaciente());
         prescripcionDAO.crear(prescripcionActual);
+        return "atencionPaciente";
+    }
+    
+    public String doEliminarPrescripcion(Prescripcion p){
+        prescripcionDAO.eliminar(p);
+        return "atencionPaciente";
+    }
+    
+    public String doRenderizarEditarPrescripcion(Prescripcion p){
+        prescripcionActual = p;
+        return "editarPrescripcion";
+    }
+    
+      public String doEditarPrescripcion(){
+        prescripcionDAO.actualizar(prescripcionActual);
         return "atencionPaciente";
     }
 
