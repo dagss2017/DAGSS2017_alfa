@@ -20,4 +20,11 @@ public class MedicamentoDAO extends GenericoDAO<Medicamento> {
             q.setParameter("query", "%" + query + "%");
             return q.getResultList();
         }
+        
+        public Medicamento buscarMedicamento(int id){
+            TypedQuery<Medicamento> q = em.createQuery("SELECT m FROM Medicamento AS m "
+                    + "  WHERE m.id = :id", Medicamento.class);
+            q.setParameter("id",id);
+            return q.getSingleResult();
+        }
 }

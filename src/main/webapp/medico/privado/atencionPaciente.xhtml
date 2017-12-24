@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -70,6 +71,15 @@
                                     <f:convertDateTime timeZone="CET" pattern="dd/MM/yyyy" />
                                 </h:outputText>
                             </h:column> 
+                            <h:column>
+                                <h:form>
+                                    <f:facet name="header"><h:outputLabel value="Accion"/></f:facet>
+                                    <b:commandButton  class="btn btn-primary" value="Editar" iconAwesome="fa-edit" 
+                                                      action="#{prescripcionControlador.doRenderizarEditarPrescripcion(prescripcion)}" />
+                                    <b:commandButton  class="btn btn-primary" value="Eliminar" iconAwesome="fa-trash" 
+                                                     action="#{prescripcionControlador.doEliminarPrescripcion(prescripcion)}" />
+                                </h:form> 
+                            </h:column>
                     </b:dataTable>
                 </b:jumbotron>
             </ui:define>
