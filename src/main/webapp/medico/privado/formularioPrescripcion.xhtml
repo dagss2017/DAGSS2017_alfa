@@ -24,8 +24,7 @@
                     <b:column offset="2" span="8">
                         <b:panel title="Confeccionar prescripción" look="primary" collapsible="false">  
                             <h:panelGrid title="Confeccionar prescripción" rendered="#{prescripcionControlador.prescripcionActual != null}">
-                                
-                                    <p:outputLabel value="Medicamento" for="medicamento" />
+                                <p:outputLabel value="Medicamento" for="medicamento" />
                                     <p:autoComplete id="medicamento" value="#{prescripcionControlador.prescripcionActual.medicamento}" completeMethod="#{prescripcionControlador.completeText}"
                                         var="medicamento" itemLabel="#{medicamento.nombre}" itemValue="#{medicamento}" converter="omnifaces.SelectItemsConverter"  forceSelection="true">        
                                         <p:column>
@@ -51,7 +50,7 @@
                                     <p:outputLabel value="Indicaciones"/>
                                     <p:inputTextarea cols="60" value="#{prescripcionControlador.prescripcionActual.indicaciones}"></p:inputTextarea>
                                     <h:commandButton class="btn btn-primary my-margin-button" value="Confirmar" 
-                                                     action="#{prescripcionControlador.doConfeccionarPrescripcion(atencionPacienteControlador.citaActual)}" />
+                                                     action="#{prescripcionControlador.doConfeccionarPrescripcion()}" />
                             </h:panelGrid>
                         </b:panel>
                     </b:column>
