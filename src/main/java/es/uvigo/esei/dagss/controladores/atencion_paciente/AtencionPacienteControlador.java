@@ -138,9 +138,9 @@ public class AtencionPacienteControlador implements Serializable {
         return "atencionPaciente";
     }
     
-    public String doListarPrescripciones(Paciente paciente){
-        prescripciones = prescripcionDAO.buscarPrescipcionesPaciente(paciente);
-        return "atencionPaciente";    
+    public List<Prescripcion> doListarPrescripciones(Paciente paciente){
+        return prescripcionDAO.buscarPrescipcionesPaciente(paciente);
+   
     }
    
     public String doCambiarEstadoCita(){  

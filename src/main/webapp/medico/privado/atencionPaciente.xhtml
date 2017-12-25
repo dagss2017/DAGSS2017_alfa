@@ -20,7 +20,7 @@
                 </h:form>
             </ui:define> 
             <ui:define name="tituloPagina">
-                <h2> Cita: 
+                <h2> #{atencionPacienteControlador.citaActual.paciente.nombre} #{atencionPacienteControlador.citaActual.paciente.apellidos}: 
                     <h:outputText  value="#{atencionPacienteControlador.citaActual.hora}" >
                         <f:convertDateTime timeZone="CET" pattern="HH:mm"/>
                     </h:outputText> 
@@ -32,29 +32,27 @@
             </ui:define>
 
             <ui:define name="contenido">
-                    <h2>Paciente: #{atencionPacienteControlador.citaActual.paciente.nombre}</h2>
                     <b:column class="menu-medico">
-                        <h:form>
-                            <h:commandButton class="btn btn-primary my-margin-button" value="Ver prescripciones" 
-                                          action="#{atencionPacienteControlador.
-                                                    doListarPrescripciones(atencionPacienteControlador.citaActual.paciente)}" />
-                        
-                            <h:commandButton class="btn btn-primary my-margin-button" value="Confeccionar prescripcion" 
-                                             action="#{prescripcionControlador.renderizarConfeccionarPrescripcion()}" />                    
-                        </h:form>  
-                    </b:column>
-                     <b:column class="menu-medico">
-                        <h:form>
-                            <b:selectOneMenu value="#{atencionPacienteControlador.estadoCita}"  label="Cambiar estado cita:" >
-                                <f:selectItem itemLabel="Ausente" itemValue="AUSENTE" />
-                                <f:selectItem itemLabel="Completada" itemValue="COMPLETADA" />
-                            </b:selectOneMenu>  
-                            <h:commandButton class="btn btn-primary my-margin-button" value="Cambiar" 
+                        <h:form>                        
+                            <h:commandButton class="btn btn-primary my-margin-button" value="Confeccionar prescripción" 
+                                             action="#{prescripcionControlador.renderizarConfeccionarPrescripcion()}" /> 
+                        </h:form> 
+                        <button id="btrigger" class="btn btn-primary my-margin-button" data-target="#amodal" data-toggle="modal">Cambiar estado cita</button>
+                        <b:modal id="amodal" title="Cambiar estado cita" styleClass="modalPseudoClass">
+                            <h:form>
+                                <b:selectOneMenu value="#{atencionPacienteControlador.estadoCita}"  label="Seleccionar opción:" >
+                                    <f:selectItem itemLabel="Ausente" itemValue="AUSENTE" />
+                                    <f:selectItem itemLabel="Completada" itemValue="COMPLETADA" />
+                                </b:selectOneMenu>  
+                              <h:commandButton class="btn btn-primary my-margin-button" value="Cambiar" 
                                              action="#{atencionPacienteControlador.doCambiarEstadoCita()}" />
                             
-                        </h:form> 
-                     </b:column>
-                    <b:dataTable id="lista_prescripciones" value="#{atencionPacienteControlador.prescripciones}"                                    
+                            </h:form> 
+                        </b:modal>
+                    </b:column>
+                <h3>Prescripciones</h3>
+                    <b:dataTable id="lista_prescripciones" value="#{atencionPacienteControlador.
+                                                                    doListarPrescripciones(atencionPacienteControlador.citaActual.paciente)}"                                    
                              var="prescripcion">                            
                             <h:column>
                                 <f:facet name="header"><h:outputLabel value="Medicamento"/></f:facet>
@@ -88,6 +86,7 @@
                                 </h:form> 
                             </h:column>
                     </b:dataTable>
+                    
             </ui:define>
 
         </ui:composition>
