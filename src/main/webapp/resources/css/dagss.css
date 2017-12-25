@@ -222,3 +222,14 @@ a:link:hover, a:visited:hover  {
     margin-top: 15px !important;
 }
 
+.custom-main-menu{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
+
+.custom-main-menu .btn-lg{
+    margin-bottom: 5px !important;
+    color: white !important;
+    text-decoration: none !important;
+}
