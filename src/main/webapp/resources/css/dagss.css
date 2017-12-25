@@ -137,3 +137,64 @@ a:link:hover, a:visited:hover  {
 .panel-body label{
     padding-right: 10px !important;
 }
+
+.custom-footer{
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 50px !important;  
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
+}
+
+.custom-footer h4{
+    margin: 15px 0 15px 0;
+    
+}
+
+.custom-header .container{
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.custom-header .custom-brand {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.custom-header .commandLink {
+    padding: 0!important;
+}
+
+.custom-title{
+    margin-bottom: 25px !important;
+}
+
+.navbar-right{
+    margin-right: 0 !important;
+}
+
+.navbar-form{
+    margin-top: 15px !important;
+}
+
+.ui-breadcrumb{
+    margin: -5px 10px 10px 10px!important;
+}
+
+.ui-widget-header{
+    background: white !important;
+}
+
+.ui-breadcrumb ul li .ui-menuitem-link {
+    text-decoration: none !important;
+}
+
+.ui-breadcrumb ul li .ui-menuitem-link span{
+    margin-top: -4px !important;
+    color: gray !important;
+}
+
+.ui-menuitem-link .ui-icon-home{
+    margin-top: 4px !important;
+}

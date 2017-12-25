@@ -10,7 +10,15 @@
     <body>
 
         <ui:composition template="/plantillas/plantillaComun.xhtml">
-
+            <ui:define name="breadcrumb">
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Home" url="" />
+                        <p:menuitem value="Agenda" url="index.xhtml" /> 
+                        <p:menuitem value="Cita" url="#" />  
+                    </p:breadCrumb>
+                </h:form>
+            </ui:define> 
             <ui:define name="tituloPagina">
                 <h2> Cita: 
                     <h:outputText  value="#{atencionPacienteControlador.citaActual.hora}" >
@@ -24,7 +32,6 @@
             </ui:define>
 
             <ui:define name="contenido">
-                <b:jumbotron>
                     <h2>Paciente: #{atencionPacienteControlador.citaActual.paciente.nombre}</h2>
                     <b:column class="menu-medico">
                         <h:form>
@@ -72,8 +79,8 @@
                                 </h:outputText>
                             </h:column> 
                             <h:column>
+                                <f:facet name="header"><h:outputLabel value="Acción"/></f:facet>
                                 <h:form>
-                                    <f:facet name="header"><h:outputLabel value="Accion"/></f:facet>
                                     <b:commandButton  class="btn btn-primary" value="Editar" iconAwesome="fa-edit" 
                                                       action="#{prescripcionControlador.doRenderizarEditarPrescripcion(prescripcion)}" />
                                     <b:commandButton  class="btn btn-primary" value="Eliminar" iconAwesome="fa-trash" 
@@ -81,7 +88,6 @@
                                 </h:form> 
                             </h:column>
                     </b:dataTable>
-                </b:jumbotron>
             </ui:define>
 
         </ui:composition>

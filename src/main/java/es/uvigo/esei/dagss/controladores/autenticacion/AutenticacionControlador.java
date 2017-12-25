@@ -93,5 +93,6 @@ public class AutenticacionControlador implements Serializable {
         // Volver a la página principal
         return "/index?faces-redirect=true";
     }
+    
 
 }

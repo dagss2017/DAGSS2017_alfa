@@ -20,10 +20,9 @@ $( document ).ready(function() {
         }   
         
     //VISTA MÉDICO
-    //$("[id='render_citas:display']").click();
-    
+   
     var $hoy = new Date(); 
-    $("[id='fecha_citas_hoy']").html("Agenda para el: "+ $hoy.getDate() + "/" +$hoy.getMonth() + "/" +$hoy.getFullYear() );
+    $("[id='fecha_citas_hoy']").html("Agenda para el: "+ $hoy.getDate() + "/" +($hoy.getMonth()+1) + "/" +$hoy.getFullYear() );
     var $rows = ($("[id='searchForm:lista_citas'] tbody tr")).length;
     for (var i = 0, max = $rows; i < max; i++) {                
         var $estadoCita = $("[id='searchForm:lista_citas:"+i+":estadoCita']").text();       
@@ -37,8 +36,6 @@ $( document ).ready(function() {
     
    });
    
-//   $table = $("[id='searchForm:lista_prescripciones']").Datatable();
-//   $table.destroy();  
    
 function formatearFecha(fecha){
     var res = fecha.split("/");

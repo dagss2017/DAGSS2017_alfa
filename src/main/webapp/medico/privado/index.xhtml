@@ -10,21 +10,28 @@
     <body>
 
         <ui:composition template="/plantillas/plantillaComun.xhtml">
-
+            <ui:define name="breadcrumb">
+                <h:form >
+                    <p:breadCrumb>
+                        <p:menuitem value="Home" url="" />
+                        <p:menuitem value="Agenda" url="#" />                    
+                    </p:breadCrumb>
+                </h:form>
+            </ui:define> 
+            
             <ui:define name="tituloPagina">
-                <h2>  Pagina principal de Médicos </h2>
+                <b:column class="custom-title"> 
+                    <h2 id="fecha_citas_hoy"> </h2>
+                </b:column>
             </ui:define>            
 
             <ui:define name="menu">
                 <ui:include src="/plantillas/menuComun.xhtml"/>
             </ui:define>
 
-            <ui:define name="contenido">
-                <b:column offset="2" span="8"> 
-                    <h2 id="fecha_citas_hoy"> </h2>
-                </b:column>
+            <ui:define name="contenido" >
                 <h:form id="searchForm">
-                    <b:column offset="2" span="8">                        
+                    <b:column>                        
                         <b:dataTable id="lista_citas" value="#{atencionPacienteControlador.buscarCitasHoy(medicoControlador.medicoActual)}"                                    
                              var="cita">
                             
