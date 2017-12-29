@@ -10,6 +10,7 @@ import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
+import es.uvigo.esei.dagss.dominio.entidades.EstadoReceta;
 import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
@@ -120,7 +121,9 @@ public class AtencionPacienteControlador implements Serializable {
     }
     
     public String doServirRecetaPaciente(Receta receta, Farmacia farmaciaDispensadora){
-        recetaDAO.servirRecetas(receta,farmaciaDispensadora);
+        receta.setFarmaciaDispensadora(farmaciaDispensadora);
+        receta.setEstadoReceta(EstadoReceta.SERVIDA);
+        recetaDAO.actualizar(receta);
         recetas = recetaDAO.buscarRecetasNts(getNts());
         return "index";
     }

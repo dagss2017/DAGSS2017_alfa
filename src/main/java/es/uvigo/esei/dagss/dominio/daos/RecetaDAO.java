@@ -5,8 +5,6 @@
 package es.uvigo.esei.dagss.dominio.daos;
 
 
-import es.uvigo.esei.dagss.dominio.entidades.EstadoReceta;
-import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
 import es.uvigo.esei.dagss.dominio.entidades.Receta;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,9 +28,4 @@ public class RecetaDAO extends GenericoDAO<Receta>{
         return q.getResultList();
     }
     
-    public void servirRecetas(Receta receta,Farmacia farmaciaDispensadora){
-        receta.setFarmaciaDispensadora(farmaciaDispensadora);
-        receta.setEstadoReceta(EstadoReceta.SERVIDA);
-        actualizar(receta);
-    };
 }
