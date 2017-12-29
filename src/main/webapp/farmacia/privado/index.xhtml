@@ -4,12 +4,21 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="/plantillas/plantillaComun.xhtml">
-
+            <ui:define name="breadcrumb">
+                <h:form>
+                    <p:breadCrumb>
+                        <p:menuitem value="Home" url="" />
+                        <p:menuitem value="Recetas paciente" url="index.xhtml" /> 
+                    </p:breadCrumb>
+                </h:form>
+            </ui:define> 
+            
             <ui:define name="tituloPagina">
                 <h2> Página principal de Farmacias </h2>
             </ui:define>            
@@ -20,18 +29,18 @@
 
             <ui:define name="contenido">
                 <h:form id="searchForm">
-                    <b:column offset="2" span="8">
+                    <b:column>
                         <b:panel title="Buscar recetas" look="primary" collapsible="false" >
                             <b:inputText id="nts" label="Nº Tarjeta Sanitaria:" value="#{atencionPacienteControlador.nts}" />
                             <b:commandButton id="searchButton" value="Buscar" action="#{atencionPacienteControlador.doBuscarRecetasEnVigor()}" span="2"/>
                         </b:panel>
                     </b:column> 
                     
-                    <b:column offset="2" span="8"> 
+                    <b:column> 
                         <h2 id="nombre-paciente">Paciente: #{atencionPacienteControlador.nombre_paciente}</h2>
                      </b:column> 
 
-                    <b:column offset="2" span="8">                        
+                    <b:column>                        
                         <b:dataTable id="lista_recetas" value="#{atencionPacienteControlador.recetas}"                                    
                              var="receta">
                             

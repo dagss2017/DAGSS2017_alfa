@@ -8,15 +8,11 @@ package es.uvigo.esei.dagss.controladores.prescripcion;
 import es.uvigo.esei.dagss.controladores.atencion_paciente.AtencionPacienteControlador;
 import es.uvigo.esei.dagss.dominio.daos.MedicamentoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
-import es.uvigo.esei.dagss.dominio.entidades.Cita;
 import es.uvigo.esei.dagss.dominio.entidades.Medicamento;
 import es.uvigo.esei.dagss.dominio.entidades.Prescripcion;
-import es.uvigo.esei.dagss.servicios.recetas.PlanificadorRecetas;
-import es.uvigo.esei.dagss.servicios.recetas.PlanificadorRecetasImpl;
 import es.uvigo.esei.dagss.servicios.recetas.PrescripcionServicio;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -39,16 +35,14 @@ public class PrescripcionControlador implements Serializable {
     @Inject
     AtencionPacienteControlador atencionPaciente;
     
+    @Inject
+    private PrescripcionServicio ps;
+    
     @EJB
     private MedicamentoDAO medicamentoDAO;
         
     @EJB
-    private PrescripcionDAO prescripcionDAO;
-    
-    @PostConstruct
-    public void inicializar(){
-        this.prescripcionServicio = new PrescripcionServicio();
-    }
+    private PrescripcionDAO prescripcionDAO;       
     
     public Prescripcion getPrescripcionActual() {
         return prescripcionActual;
@@ -68,13 +62,12 @@ public class PrescripcionControlador implements Serializable {
         return "formularioPrescripcion";
     }
     
-    public String doConfeccionarPrescripcion(){
-        prescripcionActual.setMedicamento(medicamentoDAO.buscarMedicamento(1));
+    public String doConfeccionarPrescripcion(){      
         prescripcionActual.setMedico(atencionPaciente.getCitaActual().getMedico());
         prescripcionActual.setPaciente(atencionPaciente.getCitaActual().getPaciente());
         System.out.println(atencionPaciente.getCitaActual().getPaciente().getNombre());
         prescripcionDAO.crear(prescripcionActual);
-        prescripcionServicio.procesarPrescripcion(prescripcionActual);
+        ps.procesarPrescripcion(prescripcionActual);
         return "atencionPaciente";
     }
     

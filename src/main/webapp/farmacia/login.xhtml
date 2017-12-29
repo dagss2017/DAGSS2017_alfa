@@ -11,7 +11,7 @@
         <ui:composition template="/plantillas/plantillaComun.xhtml">
               <ui:define name="contenido">
                 <h:form id="loginForm">
-                    <b:column offset="3" span="6">
+                    <b:column>
                         <b:panel title="Login de farmacias" look="primary" collapsible="false">
                             <b:inputText id="nif" label="NIF farmacia:" value="#{farmaciaControlador.nif}" />
                             <b:inputSecret id="password" label="Contraseña:" value="#{farmaciaControlador.password}"/>

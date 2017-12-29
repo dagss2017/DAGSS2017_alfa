@@ -6,12 +6,10 @@
 package es.uvigo.esei.dagss.controladores.atencion_paciente;
 
 import es.uvigo.esei.dagss.controladores.autenticacion.AutenticacionControlador;
-import es.uvigo.esei.dagss.controladores.medico.MedicoControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
-import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
 import es.uvigo.esei.dagss.dominio.entidades.Farmacia;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
@@ -20,7 +18,6 @@ import es.uvigo.esei.dagss.dominio.entidades.Receta;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

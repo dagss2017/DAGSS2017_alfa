@@ -9,16 +9,21 @@ import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
 import es.uvigo.esei.dagss.dominio.daos.RecetaDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Prescripcion;
 import es.uvigo.esei.dagss.dominio.entidades.Receta;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 
 /**
  *
  * @author angel
  */
-public class PrescripcionServicio {
+@Stateless
+public class PrescripcionServicio implements Serializable{
     
     @Inject 
     PrescripcionDAO prescripcionDAO;
