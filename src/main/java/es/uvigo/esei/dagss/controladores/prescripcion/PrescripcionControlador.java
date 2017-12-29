@@ -27,8 +27,7 @@ import javax.inject.Named;
 public class PrescripcionControlador implements Serializable {
     
 
-    List<Medicamento> filteredMedicamentos;
-    
+    List<Medicamento> filteredMedicamentos;    
     Prescripcion prescripcionActual;
     PrescripcionServicio prescripcionServicio;
     
@@ -51,6 +50,10 @@ public class PrescripcionControlador implements Serializable {
     public void setPrescripcionActual(Prescripcion prescripcionActual) {
         this.prescripcionActual = prescripcionActual;
     }
+               
+    public List<Medicamento> getFilteredMedicamentos() {
+        return filteredMedicamentos;
+}
     
     public List<Medicamento> completeText(String query) {  
         filteredMedicamentos = medicamentoDAO.buscarPorCampos(query);
@@ -65,7 +68,6 @@ public class PrescripcionControlador implements Serializable {
     public String doConfeccionarPrescripcion(){      
         prescripcionActual.setMedico(atencionPaciente.getCitaActual().getMedico());
         prescripcionActual.setPaciente(atencionPaciente.getCitaActual().getPaciente());
-        System.out.println(atencionPaciente.getCitaActual().getPaciente().getNombre());
         prescripcionDAO.crear(prescripcionActual);
         ps.procesarPrescripcion(prescripcionActual);
         return "atencionPaciente";
@@ -85,10 +87,5 @@ public class PrescripcionControlador implements Serializable {
         prescripcionDAO.actualizar(prescripcionActual);
         return "atencionPaciente";
     }
-      
-      
-    public List<Medicamento> getFilteredMedicamentos() {
-        return filteredMedicamentos;
-}
 
 }
